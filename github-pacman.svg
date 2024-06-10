@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-playing Random Pacman</title>
+    <style>
+        .pacman {
+            fill: yellow;
+            stroke: black;
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body>
+
+<svg id="pacman-svg" width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+    <circle id="pacman" class="pacman" cx="50" cy="50" r="20"/>
+</svg>
+
+<script>
+    const pacman = document.getElementById('pacman');
+    const svg = document.getElementById('pacman-svg');
+    const directions = [
+        {dx: 5, dy: 0},
+        {dx: -5, dy: 0},
+        {dx: 0, dy: 5},
+        {dx: 0, dy: -5}
+    ];
+
+    function getRandomDirection() {
+        return directions[Math.floor(Math.random() * directions.length)];
+    }
+
+    function movePacman() {
+        const direction = getRandomDirection();
+        let cx = parseFloat(pacman.getAttribute('cx')) + direction.dx;
+        let cy = parseFloat(pacman.getAttribute('cy')) + direction.dy;
+
+        if (cx < 0) cx = svg.clientWidth;
+        if (cx > svg.clientWidth) cx = 0;
+        if (cy < 0) cy = svg.clientHeight;
+        if (cy > svg.clientHeight) cy = 0;
+
+        pacman.setAttribute('cx', cx);
+        pacman.setAttribute('cy', cy);
+    }
+
+    setInterval(movePacman, 200);
+</script>
+
+</body>
+</html>
