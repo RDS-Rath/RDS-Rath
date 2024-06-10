@@ -1,3 +1,3 @@
 <p align="center">
- <img width="1000" src="github-snake.svg" alt="snake"/>
+ <img width="1000" src="pacman.py" alt="pacman"/>
 </p>
