@@ -3,51 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Self-playing Random Pacman</title>
-    <style>
-        .pacman {
-            fill: yellow;
-            stroke: black;
-            stroke-width: 2;
-        }
-    </style>
+    <title>Pacman SVG Animation</title>
 </head>
 <body>
 
-<svg id="pacman-svg" width="600" height="400" xmlns="http://www.w3.org/2000/svg">
-    <circle id="pacman" class="pacman" cx="50" cy="50" r="20"/>
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Pacman -->
+    <circle id="pacman" cx="30" cy="30" r="20" fill="yellow">
+        <!-- Movement animation -->
+        <animateMotion repeatCount="indefinite" dur="10s">
+            <mpath xlink:href="#path"/>
+        </animateMotion>
+    </circle>
+
+    <!-- Path for Pacman to follow -->
+    <path id="path" fill="none" stroke="none" d="M30,30 L570,30 L570,370 L30,370 Z"/>
+
+    <!-- Food (dots) -->
+    <circle cx="100" cy="30" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;0.1;0.2;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="30" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;0.2;0.3;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="30" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;0.3;0.4;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="400" cy="30" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;0.4;0.5;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="500" cy="30" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;0.5;0.6;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- More dots for the bottom part of the path -->
+    <circle cx="100" cy="370" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;0.6;0.7;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="370" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;0.7;0.8;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="370" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;0.8;0.9;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="400" cy="370" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;0.9;1;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="500" cy="370" r="5" fill="white">
+        <animate attributeName="visibility" values="visible;hidden" keyTimes="0;1;1;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
 </svg>
-
-<script>
-    const pacman = document.getElementById('pacman');
-    const svg = document.getElementById('pacman-svg');
-    const directions = [
-        {dx: 5, dy: 0},
-        {dx: -5, dy: 0},
-        {dx: 0, dy: 5},
-        {dx: 0, dy: -5}
-    ];
-
-    function getRandomDirection() {
-        return directions[Math.floor(Math.random() * directions.length)];
-    }
-
-    function movePacman() {
-        const direction = getRandomDirection();
-        let cx = parseFloat(pacman.getAttribute('cx')) + direction.dx;
-        let cy = parseFloat(pacman.getAttribute('cy')) + direction.dy;
-
-        if (cx < 0) cx = svg.clientWidth;
-        if (cx > svg.clientWidth) cx = 0;
-        if (cy < 0) cy = svg.clientHeight;
-        if (cy > svg.clientHeight) cy = 0;
-
-        pacman.setAttribute('cx', cx);
-        pacman.setAttribute('cy', cy);
-    }
-
-    setInterval(movePacman, 200);
-</script>
 
 </body>
 </html>
